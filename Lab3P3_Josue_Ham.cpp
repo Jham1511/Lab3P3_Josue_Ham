@@ -144,27 +144,7 @@ void imprimir_matriz(char** mat, int filas, int columnas) {
 		printf("\n");
 	}
 }
-void matriz_obstaculos() {
-	cout << "Ingrese las filas de la matriz: ";
-	int filas;
-	cin >> filas;
-	cout << "Ingrese las columnas de la matriz: ";
-	int columnas;
-	cin >> columnas;
-	cout << "Ingrese los obstaculos de la matriz: ";
-	int obstaculos;
-	cin >> obstaculos;
-	int casillas = filas * columnas;
-	if (filas >= 5 && columnas >= 5 && (obstaculos >= 1 || obstaculos < casillas)) {
-		char** mat = Llenar_Matriz(filas, columnas);
-		agregar_obstaculos(mat, obstaculos, filas, columnas);
-		imprimir_matriz(mat, filas, columnas);
-	}
-	else {
-		printf("\n");
-		cout << "Datos no validos";
-	}
-}
+
 int menu() {
 	cout << "\nMenu del Programa" << endl
 		<< "1 -> Ejercicio 1 (Discos)" << endl
@@ -183,14 +163,33 @@ int main()
 		switch (respuesta) {
 		case 1: {
 			discos_ejercicio1();
-		}
-			  break;
+			break;
+		}// Fin case 1
+			 
 		case 2: {
-			srand(time(NULL));
-			matriz_obstaculos();
-		}
-			  break;
+			printf("\n");
+			cout << "Ingrese las filas de la matriz: ";
+			int filas;
+			cin >> filas;
+			cout << "Ingrese las columnas de la matriz: ";
+			int columnas;
+			cin >> columnas;
+			cout << "Ingrese los obstaculos de la matriz: ";
+			int obstaculos;
+			cin >> obstaculos;
+			int casillas = filas * columnas;
+			if (filas >= 5 && columnas >= 5 && (obstaculos >= 1 || obstaculos < casillas)) {
+				char** mat = Llenar_Matriz(filas, columnas);
+				agregar_obstaculos(mat, obstaculos, filas, columnas);
+				imprimir_matriz(mat, filas, columnas);
+			}
+			else {
+				cout << "Datos no validos";
+			}
+			break;
+		}//Fin case 2
+			  
 		}//Fin del switch
+		respuesta = menu();
 	}//Fin del while
-	respuesta = menu();
 }
