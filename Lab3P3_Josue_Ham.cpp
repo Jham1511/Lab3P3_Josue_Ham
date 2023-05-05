@@ -1,11 +1,13 @@
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
 
 
 
 void discos_ejercicio1() {
 	int disco1[8], disco2[8], discoXOR[8];
-	int opcion = 0;
+	int opcion;
 	bool banderaDisco1 = false;
 	bool banderaDisco2 = false;
 	do
@@ -99,14 +101,46 @@ void discos_ejercicio1() {
 		}
 	} while (opcion!=4);
 }
+char** Llenar_Matriz(int filas, int columnas) {
+	char** M;
+	M = new char*[filas];
+	for (int i = 0; i < filas; i++)
+	{
+		M[i] = new char[columnas];
+	}
+}
+int posicion_random(int tam) {
+	int aleatorio = 1 + rand() % ((tam-1) - 1);
+	return aleatorio;
+}
+void agregar_obstáculos(char** matriz, int obstaculos, int filas, int columnas) {
 
+}
+void imprimir_matriz(char** matriz, int filas, int columnas) {
+
+}
 void matriz_obstaculos() {
-
+	cout << "Ingrese las filas de la matriz: ";
+	int filas;
+	cin >> filas;
+	cout << "Ingrese las columnas de la matriz: ";
+	int columnas;
+	cin >> columnas;
+	cout << "Ingrese los obstaculos de la matriz: ";
+	int obstaculos;
+	cin >> obstaculos;
+	int casillas = filas * columnas;
+	if (filas >= 5 && columnas >= 5 && (obstaculos >= 1 || obstaculos < casillas)) {
+		Llenar_Matriz(filas, columnas);
+	}
+	else {
+		cout << "Datos no validos";
+	}
 }
 int menu() {
 	cout << "\nMenu del Programa" << endl
-		<< "1 -> Ejercicio 1" << endl
-		<< "2 -> Ejercicio 2" << endl
+		<< "1 -> Ejercicio 1 (Discos)" << endl
+		<< "2 -> Ejercicio 2 (Matriz Obstaculos)" << endl
 		<< "3 -> Salir" << endl
 		<< "Ingrese la opcion que desea: " << endl;
 	int numero;
@@ -124,7 +158,8 @@ int main()
 		}
 			  break;
 		case 2: {
-
+			srand(time(NULL));
+			matriz_obstaculos();
 		}
 			  break;
 		}//Fin del switch
