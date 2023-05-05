@@ -107,17 +107,42 @@ char** Llenar_Matriz(int filas, int columnas) {
 	for (int i = 0; i < filas; i++)
 	{
 		M[i] = new char[columnas];
+		for (int j = 0; j < columnas; j++)
+		{
+			M[i][j] = '-';
+		}
 	}
+	return M;
 }
+
 int posicion_random(int tam) {
 	int aleatorio = 1 + rand() % ((tam-1) - 1);
 	return aleatorio;
 }
-void agregar_obstáculos(char** matriz, int obstaculos, int filas, int columnas) {
-
+void agregar_obstaculos(char** mat, int obstaculos, int filas, int columnas) {
+	int obstaculos_agregados = 0;
+	do {
+		int fila = posicion_random(filas);
+		int columna = posicion_random(columnas);
+		if (mat[fila][columna] == '-') {
+			mat[fila][columna] = '#';
+			obstaculos_agregados++;
+		}
+	} while (obstaculos_agregados < obstaculos);
 }
-void imprimir_matriz(char** matriz, int filas, int columnas) {
 
+void imprimir_matriz(char** mat, int filas, int columnas) {
+	printf("\n");
+	for (int i = 0; i < filas; i++)
+	{
+		cout << "|";
+		for (int j = 0; j < columnas; j++)
+		{
+			cout << "'" << mat[i][j] << "'";
+		}
+		cout << "|";
+		printf("\n");
+	}
 }
 void matriz_obstaculos() {
 	cout << "Ingrese las filas de la matriz: ";
@@ -131,9 +156,12 @@ void matriz_obstaculos() {
 	cin >> obstaculos;
 	int casillas = filas * columnas;
 	if (filas >= 5 && columnas >= 5 && (obstaculos >= 1 || obstaculos < casillas)) {
-		Llenar_Matriz(filas, columnas);
+		char** mat = Llenar_Matriz(filas, columnas);
+		agregar_obstaculos(mat, obstaculos, filas, columnas);
+		imprimir_matriz(mat, filas, columnas);
 	}
 	else {
+		printf("\n");
 		cout << "Datos no validos";
 	}
 }
