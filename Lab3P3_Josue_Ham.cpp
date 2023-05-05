@@ -106,32 +106,32 @@ char** Llenar_Matriz(int filas, int columnas) {
 	M = new char*[filas];
 	for (int i = 0; i < filas; i++)
 	{
-		M[i] = new char[columnas];
+		M[i] = new char[columnas]; //Se guardan espacios en memoria
 		for (int j = 0; j < columnas; j++)
 		{
-			M[i][j] = '-';
+			M[i][j] = '-'; //Se llena la matriz de casillas normales
 		}
 	}
 	return M;
 }
 
 int posicion_random(int tam) {
-	int aleatorio = 1 + rand() % ((tam-1) - 1);
+	int aleatorio = 1 + rand() % ((tam-1) - 1); //Rango de las casillas
 	return aleatorio;
 }
 void agregar_obstaculos(char** mat, int obstaculos, int filas, int columnas) {
-	int obstaculos_agregados = 0;
+	int obstaculos_agregados = 0; //Contador para ir controlando el ciclo
 	do {
 		int fila = posicion_random(filas);
 		int columna = posicion_random(columnas);
-		if (mat[fila][columna] == '-') {
-			mat[fila][columna] = '#';
-			obstaculos_agregados++;
+		if (mat[fila][columna] == '-') { //Comparo si los caracteres son iguales para no chocar obstaculos
+			mat[fila][columna] = '#'; //Si se cumple se agrega en esa posicion el obstaculo
+			obstaculos_agregados++; //Se incrementa el contador
 		}
 	} while (obstaculos_agregados < obstaculos);
 }
 
-void imprimir_matriz(char** mat, int filas, int columnas) {
+void imprimir_matriz(char** mat, int filas, int columnas) { //Solo imprime la matriz con el formato deseado
 	printf("\n");
 	for (int i = 0; i < filas; i++)
 	{
@@ -182,6 +182,11 @@ int main()
 				char** mat = Llenar_Matriz(filas, columnas);
 				agregar_obstaculos(mat, obstaculos, filas, columnas);
 				imprimir_matriz(mat, filas, columnas);
+				for (int i = 0; i < filas; i++)
+				{
+					delete[] mat[i];
+				}
+				delete[] mat;
 			}
 			else {
 				cout << "Datos no validos";
